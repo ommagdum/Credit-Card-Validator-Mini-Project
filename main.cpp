@@ -1,9 +1,6 @@
 // Entry point for the application.
 #include <iostream>
 #include "credit_card.h"
-
-#include <iostream>
-
 int main()
 {
 std::cout << "__| |______________________________________________________________________| |__" << std::endl;

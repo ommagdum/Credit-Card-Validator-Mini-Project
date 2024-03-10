@@ -1,1 +1,1 @@
-// Entry point for the application.
+//Main entry point of the program

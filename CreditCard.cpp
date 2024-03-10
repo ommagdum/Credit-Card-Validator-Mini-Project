@@ -1,4 +1,4 @@
-// CreditCard Class Implementation
+// Implement CreditCard class definition in CreditCard.cpp
 #include "CreditCard.h"
 
 CreditCard::CreditCard(std::string num) : number(num) {}

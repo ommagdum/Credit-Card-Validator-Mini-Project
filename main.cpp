@@ -1,4 +1,4 @@
-//Main entry point of the program
+//Add main.cpp for program entry point
 #include "UserInterface.h"
 
 int main() {

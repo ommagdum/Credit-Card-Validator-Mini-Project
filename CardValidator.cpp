@@ -1,4 +1,4 @@
-// Implementation of CardValidator
+// Implement CardValidator class definition in CardValidator.cpp
 #include "CardValidator.h"
 #include <iostream> 
 

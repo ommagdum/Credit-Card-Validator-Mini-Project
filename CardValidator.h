@@ -1,4 +1,4 @@
-// Defination for CardValidator
+// Implement CardValidator class declaration in CardValidator.h
 #ifndef CARDVALIDATOR_H
 #define CARDVALIDATOR_H
 

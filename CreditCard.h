@@ -1,4 +1,4 @@
-//Defination for CreditCard class
+//Implement CreditCard class declaration in CreditCard.h
 
 #ifndef CREDITCARD_H
 #define CREDITCARD_H

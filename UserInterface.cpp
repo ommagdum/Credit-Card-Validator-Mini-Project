@@ -1,3 +1,5 @@
+// Implement UserInterface class definition in UserInterface.cpp
+
 #include "UserInterface.h"
 #include "CardValidator.h"
 #include "CreditCard.h"

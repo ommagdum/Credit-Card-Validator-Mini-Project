@@ -17,6 +17,7 @@ public:
     static bool validate(const std::string& number);
     static std::string identifyCardType(const std::string& number);
     static bool checkFormatting(const std::string& number);
+    static void saveValidNumber(const std::string& number);
 };
 
 class UserInterface {

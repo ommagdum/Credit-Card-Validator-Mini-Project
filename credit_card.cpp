@@ -1,7 +1,7 @@
 // Implementation of functions declared in credit_card.h
-
-#include "credit_card.h"
+#include "credit_card.hpp"
 #include <iostream> 
+#include <fstream>
 void UserInterface::start() {
     std::string input;
     std::cout << "__| |______________________________________________________________________| |__" << std::endl;
@@ -36,45 +36,51 @@ void UserInterface::start() {
         std::cout << "Enter a credit card number (or 'quit' to exit): ";
         std::cin >> input;
         if (input != "quit") {
-            if (CardValidator::checkFormatting(input)) {
-                if (CardValidator::validate(input)) {
-                    std::cout << "Valid Credit Card. Type: " << CardValidator::identifyCardType(input) << "\n";
-                } else {
-                    std::cout << "Invalid Credit Card.\n";
+            if (CardValidator::isNumberVerified(input)) {
+                std::cout << "This card number is already verified. Type: " << CardValidator::identifyCardType(input) << "\n";
+            } else {
+                if (CardValidator::checkFormatting(input)) {
+                    if (CardValidator::validate(input)) {
+                        std::string cardType = CardValidator::identifyCardType(input);
+                        std::cout << "Valid Credit Card. Type: " << cardType << "\n";
+                        CardValidator::saveValidNumber(input, cardType);
+                    } else {
+                        std::cout << "Invalid Credit Card.\n";
+                    }
                 }
-            } 
+            }
         }
     } while (input != "quit");
 }
-
+/*
 CreditCard::CreditCard(std::string num) : number(num) {}
 
 std::string CreditCard::getNumber() {
     return number;
 }
-
+*/
 bool CardValidator::validate(const std::string& number) {
-    int length = number.length();
-    int doubleEvenSum = 0;
+    int length = number.length(); // length of the number
+    int doubleEvenSum = 0; // sum of even digits doubled
 
-    for(int i = length - 2; i >=0 ; i -= 2){
-        int digit = ((number[i] - 48)*2);
-        if(digit > 9) {
-            digit = (digit/10) + (digit%10);
+    for(int i = length - 2; i >=0 ; i -= 2){ 
+        int digit = ((number[i] - 48)*2);     // double the even place digit 
+        if(digit > 9) {                       // if the digit is greater than 9, 
+            digit = (digit/10) + (digit%10);  // add the two digits together
         }
-        doubleEvenSum += digit;
+        doubleEvenSum += digit;               // add the digit to the sum
     }
 
-    for(int i = length - 1; i >= 0; i -= 2){
-        int digit = (number[i] - 48);
-        doubleEvenSum += (number[i] - 48);
+    for(int i = length - 1; i >= 0; i -= 2){ 
+        int digit = (number[i] - 48);         // select odd place digits
+        doubleEvenSum += (number[i] - 48);    // add the digit to the sum
     }
 
-    if(doubleEvenSum % 10 == 0) {
-        return true;
+    if(doubleEvenSum % 10 == 0) {            // if the sum is divisible by 10,
+        return true;                         // the number is valid
     }
     else {
-        return false;
+        return false;                        // the number is invalid
     }
 }
 
@@ -123,4 +129,26 @@ bool CardValidator::checkFormatting(const std::string& number) {
         return false;
     }
  return true;
+}
+
+void CardValidator::saveValidNumber(const std::string& number, const std::string& cardType) {
+    std::ofstream validCards("valid_cards.txt", std::ios::app);
+    if (validCards.is_open()) {
+        validCards << number << "," << cardType << "\n";
+        validCards.close();
+    }
+}
+
+bool CardValidator::isNumberVerified(const std::string& number) {
+    std::ifstream validCards("valid_cards.txt");
+    std::string line;
+    while (std::getline(validCards, line)) {
+        std::size_t pos = line.find(",");
+        if (pos != std::string::npos && line.substr(0, pos) == number) {
+            validCards.close();
+            return true;
+        }
+    }
+    validCards.close();
+    return false;
 }

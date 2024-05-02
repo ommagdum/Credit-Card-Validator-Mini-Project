@@ -1,5 +1,5 @@
 // Entry point for the application.
-#include "credit_card.h"
+#include "credit_card.hpp"
 int main() {
     UserInterface ui;
     ui.start();

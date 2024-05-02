@@ -1,6 +1,5 @@
 // Implementation of functions declared in credit_card.h
-
-#include "credit_card.h"
+#include "credit_card.hpp"
 #include <iostream> 
 #include <fstream>
 void UserInterface::start() {
@@ -37,15 +36,19 @@ void UserInterface::start() {
         std::cout << "Enter a credit card number (or 'quit' to exit): ";
         std::cin >> input;
         if (input != "quit") {
-            if (CardValidator::checkFormatting(input)) {
-                if (CardValidator::validate(input)) {
-                    // CardValidator::saveValidNumber(input);
-                    std::cout << "Valid Credit Card. Type: " << CardValidator::identifyCardType(input) << "\n";
-                    CardValidator::saveValidNumber(input);
-                } else {
-                    std::cout << "Invalid Credit Card.\n";
+            if (CardValidator::isNumberVerified(input)) {
+                std::cout << "This card number is already verified. Type: " << CardValidator::identifyCardType(input) << "\n";
+            } else {
+                if (CardValidator::checkFormatting(input)) {
+                    if (CardValidator::validate(input)) {
+                        std::string cardType = CardValidator::identifyCardType(input);
+                        std::cout << "Valid Credit Card. Type: " << cardType << "\n";
+                        CardValidator::saveValidNumber(input, cardType);
+                    } else {
+                        std::cout << "Invalid Credit Card.\n";
+                    }
                 }
-            } 
+            }
         }
     } while (input != "quit");
 }
@@ -128,10 +131,24 @@ bool CardValidator::checkFormatting(const std::string& number) {
  return true;
 }
 
-void CardValidator::saveValidNumber(const std::string& number){
+void CardValidator::saveValidNumber(const std::string& number, const std::string& cardType) {
     std::ofstream validCards("valid_cards.txt", std::ios::app);
-    if(validCards.is_open()) {
-        validCards << number << "\n";
+    if (validCards.is_open()) {
+        validCards << number << "," << cardType << "\n";
         validCards.close();
     }
+}
+
+bool CardValidator::isNumberVerified(const std::string& number) {
+    std::ifstream validCards("valid_cards.txt");
+    std::string line;
+    while (std::getline(validCards, line)) {
+        std::size_t pos = line.find(",");
+        if (pos != std::string::npos && line.substr(0, pos) == number) {
+            validCards.close();
+            return true;
+        }
+    }
+    validCards.close();
+    return false;
 }

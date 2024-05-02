@@ -3,7 +3,7 @@ This is a simple C++ application to validate credit card numbers.
 
 ## Files
 - main.cpp - Contains the entry point for the application and instantiates the UserInterface
-- credit_card.h - Declares the CreditCard, CardValidator, and UserInterface classes
+- credit_card.hpp - Declares the CreditCard, CardValidator, and UserInterface classes
 - credit_card.cpp - Implements the methods declared in credit_card.h
 ## Features
 - UserInterface prompts user for card number and displays validation result

@@ -37,15 +37,41 @@ void UserInterface::start() {
         std::cin >> input;
         if (input != "quit") {
             if (CardValidator::isNumberVerified(input)) {
-                std::cout << "This card number is already verified. Type: " << CardValidator::identifyCardType(input) << "\n";
+                std::cout << " _____                                                                                          _____ " << std::endl;
+                std::cout << "( ___ )                                                                                        ( ___ )" << std::endl;
+                std::cout << " |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | "<< std::endl;
+                std::cout << " |   |           __    __)           )   ___                     )   ___                        |   |" << std::endl;
+                std::cout << " |   |          (, )  /     /) ,   /(__/_____)          /) ,    (__/_____)          /)          |   |" << std::endl;
+                std::cout << " |   |             | / _   //    _(/  /       __   _  _(/   _/_   /       _   __  _(/           |   |" << std::endl;
+                std::cout << " |   |             |/ (_(_(/__(_(_(_ /       / (__(/_(_(__(_(__  /       (_(_/ (_(_(_           |   |" << std::endl;
+                std::cout << " |   |             |                (______)                    (______)                        |   |" << std::endl;
+                std::cout << " |   |                                                                                          |   |" << std::endl;
+                std::cout << " |   |            Card Was Already Verified And Saved To File.                                  |   |" << std::endl;
+                std::cout << " |   |                                                                                          |   |" << std::endl;
+                std::cout << " |   |            Credit Card Number : " << std::left << std::setw(44) << input << "             |   |" << std::endl;
+                std::cout << " |   |                                                                                          |   |" << std::endl;
+                std::cout << " |   |            Credit Card Type : " << std::left << std::setw(48) << CardValidator::identifyCardType(input) << "           |   |" << std::endl;
+                std::cout << " |   |                                                                                          |   |" << std::endl;
+                std::cout << " |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___|" << std::endl;
+                std::cout << "(_____)                                                                                        (_____)" << std::endl;
             } else {
                 if (CardValidator::checkFormatting(input)) {
                     if (CardValidator::validate(input)) {
                         std::string cardType = CardValidator::identifyCardType(input);
-                        std::cout << "Valid Credit Card. Type: " << cardType << "\n";
+                        // std::cout << "Valid Credit Card. Type: " << cardType << "\n";
                         CardValidator::saveValidNumber(input, cardType);
                     } else {
-                        std::cout << "Invalid Credit Card.\n";
+                        std::cout << " _____                                                                                          _____ " << std::endl;
+                        std::cout << "( ___ )                                                                                        ( ___ )" << std::endl;
+                        std::cout << " |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | "<< std::endl;
+                        std::cout << " |   |         _____                     )   ___                     )   ___                    |   |" << std::endl;
+                        std::cout << " |   |        (, /              /) ,   /(__/_____)          /) ,    (__/_____)          /)      |   |" << std::endl;
+                        std::cout << " |   |          / __  _ _  _   //    _(/  /       __   _  _(/   _/_   /       _   __  _(/       |   |" << std::endl;
+                        std::cout << " |   |      ___/__/ (_(/__(_(_(/__(_(_(_ /       / (__(/_(_(__(_(__  /       (_(_/ (_(_(_       |   |" << std::endl;
+                        std::cout << " |   |    (__ /                         (______)                    (______)                    |   |" << std::endl;
+                        std::cout << " |   |                                                                                          |   |" << std::endl;
+                        std::cout << " |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___|" << std::endl;
+                        std::cout << "(_____)                                                                                        (_____)" << std::endl;
                     }
                 }
             }
@@ -136,6 +162,24 @@ void CardValidator::saveValidNumber(const std::string& number, const std::string
     if (validCards.is_open()) {
         validCards << number << "," << cardType << "\n";
         validCards.close();
+
+        std::cout << " _____                                                                                          _____ " << std::endl;
+        std::cout << "( ___ )                                                                                        ( ___ )" << std::endl;
+        std::cout << " |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | "<< std::endl;
+        std::cout << " |   |           __    __)           )   ___                     )   ___                        |   |" << std::endl;
+        std::cout << " |   |          (, )  /     /) ,   /(__/_____)          /) ,    (__/_____)          /)          |   |" << std::endl;
+        std::cout << " |   |             | / _   //    _(/  /       __   _  _(/   _/_   /       _   __  _(/           |   |" << std::endl;
+        std::cout << " |   |             |/ (_(_(/__(_(_(_ /       / (__(/_(_(__(_(__  /       (_(_/ (_(_(_           |   |" << std::endl;
+        std::cout << " |   |             |                (______)                    (______)                        |   |" << std::endl;
+        std::cout << " |   |                                                                                          |   |" << std::endl;
+        std::cout << " |   |            Credit Card Number : " << std::left << std::setw(44) << number << "             |   |" << std::endl;
+        std::cout << " |   |                                                                                          |   |" << std::endl;
+        std::cout << " |   |            Credit Card Type : " << std::left << std::setw(48) << cardType << "           |   |" << std::endl;
+        std::cout << " |   |                                                                                          |   |" << std::endl;
+        std::cout << " |   |            Card Saved To File.                                                           |   |" << std::endl;
+        std::cout << " |   |                                                                                          |   |" << std::endl;
+        std::cout << " |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___|" << std::endl;
+        std::cout << "(_____)                                                                                        (_____)" << std::endl;
     }
 }
 

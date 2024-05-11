@@ -150,7 +150,7 @@ bool CardValidator::checkFormatting(const std::string& number) {
     }
 
     // Check if length is equal to 16 or 19
-    if (number.length()!= 16 && number.length()!= 19){
+    if (number.length()!= 14 && number.length()!= 15  &&  number.length()!= 16 && number.length()!= 19){
         std::cout << "Invlaid Length" << std::endl;
         return false;
     }

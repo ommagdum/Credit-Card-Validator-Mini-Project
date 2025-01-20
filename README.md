@@ -2,6 +2,10 @@
 
 This is a simple C++ application to validate credit card numbers. It supports various card types, including Visa, Mastercard, American Express, JCB, Diners Club, and Maestro.
 
+## Workflow And Dependency Graph
+![Workflow](https://github.com/ommagdum/Credit-Card-Validator-Mini-Project/blob/main/Workflow.png) ![Dependency Graph](https://github.com/ommagdum/Credit-Card-Validator-Mini-Project/blob/main/DependencyGrpah.png)
+
+
 ## Features
 
 - Validates credit card numbers using the Luhn algorithm
